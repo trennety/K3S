@@ -1,0 +1,6 @@
+operator:
+  enabled: true
+alertmanager:
+  enabled: false
+blackboxExporter:
+  enabled: false

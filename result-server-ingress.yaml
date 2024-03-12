@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: result-server-ingress
+  namespace: exampleapp
+  annotations:
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true" # Redirect www to non-www
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - result-server.meta # Replace with your domain
+      secretName: result-server.meta-tls # Replace with your domain
+  rules:
+    - host: result-server.meta # Replace with your domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: result-server-service
+                port:
+                  name: http
